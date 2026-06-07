@@ -22,6 +22,8 @@ import type {
 
 type ViewMode = "sentences" | "words";
 
+type ViewModeSelection = Record<ViewMode, boolean>;
+
 type SentenceSection = {
   lesson: Lesson;
   group: LessonGroup;
@@ -36,12 +38,17 @@ type VocabularySection = {
 const content = rawContent as PracticeContent;
 
 export default function App() {
-  const [viewMode, setViewMode] = useState<ViewMode>("sentences");
+  const [selectedViewModes, setSelectedViewModes] = useState<ViewModeSelection>({
+    sentences: true,
+    words: false,
+  });
   const [selectedLessonId, setSelectedLessonId] = useState(content.lessons[0]?.id ?? "");
   const [query, setQuery] = useState("");
   const speech = useKoreanSpeech();
 
   const normalizedQuery = query.trim().toLowerCase();
+  const isSentencesSelected = selectedViewModes.sentences;
+  const isWordsSelected = selectedViewModes.words;
   const selectedLesson =
     content.lessons.find((lesson) => lesson.id === selectedLessonId) ?? content.lessons[0];
 
@@ -56,16 +63,40 @@ export default function App() {
   );
 
   const visibleItems = useMemo(() => {
-    const sections = viewMode === "sentences" ? sentenceSections : vocabularySections;
-    return sections.flatMap((section) => section.items);
-  }, [sentenceSections, viewMode, vocabularySections]);
+    const sentenceItems = isSentencesSelected
+      ? sentenceSections.flatMap((section) => section.items)
+      : [];
+    const wordItems = isWordsSelected ? vocabularySections.flatMap((section) => section.items) : [];
+    return [...sentenceItems, ...wordItems];
+  }, [isSentencesSelected, isWordsSelected, sentenceSections, vocabularySections]);
 
   const canPlay = speech.availability === "supported" && visibleItems.length > 0;
   const practiceHeading = normalizedQuery
     ? "検索結果"
-    : viewMode === "sentences"
+    : isSentencesSelected && isWordsSelected
+      ? "例文と単語"
+      : isSentencesSelected
       ? selectedLesson?.title
       : "登場単語一覧";
+  const queueLabel =
+    isSentencesSelected && isWordsSelected
+      ? "Practice Queue"
+      : isSentencesSelected
+        ? "Sentence Queue"
+        : "Word Queue";
+
+  const toggleViewMode = (mode: ViewMode) => {
+    setSelectedViewModes((current) => {
+      const enabledCount = Number(current.sentences) + Number(current.words);
+      if (current[mode] && enabledCount === 1) {
+        return current;
+      }
+      return {
+        ...current,
+        [mode]: !current[mode],
+      };
+    });
+  };
 
   if (!selectedLesson) {
     return <div className="app unavailable">教材データがありません。</div>;
@@ -130,7 +161,7 @@ export default function App() {
                 type="button"
                 onClick={() => {
                   setSelectedLessonId(lesson.id);
-                  setViewMode("sentences");
+                  setSelectedViewModes((current) => ({ ...current, sentences: true }));
                 }}
               >
                 <span>{String(lesson.number).padStart(2, "0")}</span>
@@ -143,31 +174,29 @@ export default function App() {
         <section className="practice-area">
           <div className="practice-toolbar">
             <div className="practice-title-group">
-              <div className="mode-switch" role="tablist" aria-label="表示">
+              <div className="mode-switch" role="group" aria-label="表示">
                 <button
-                  className={viewMode === "sentences" ? "active" : ""}
+                  className={isSentencesSelected ? "active" : ""}
                   data-testid="sentences-tab"
                   type="button"
-                  role="tab"
-                  aria-selected={viewMode === "sentences"}
-                  onClick={() => setViewMode("sentences")}
+                  aria-pressed={isSentencesSelected}
+                  onClick={() => toggleViewMode("sentences")}
                 >
                   <BookOpen size={18} aria-hidden="true" />
                   例文
                 </button>
                 <button
-                  className={viewMode === "words" ? "active" : ""}
+                  className={isWordsSelected ? "active" : ""}
                   data-testid="words-tab"
                   type="button"
-                  role="tab"
-                  aria-selected={viewMode === "words"}
-                  onClick={() => setViewMode("words")}
+                  aria-pressed={isWordsSelected}
+                  onClick={() => toggleViewMode("words")}
                 >
                   <Languages size={18} aria-hidden="true" />
                   単語
                 </button>
               </div>
-              <p className="eyebrow">{viewMode === "sentences" ? "Sentence Queue" : "Word Queue"}</p>
+              <p className="eyebrow">{queueLabel}</p>
               <h2>{practiceHeading}</h2>
             </div>
 
@@ -217,21 +246,24 @@ export default function App() {
             </div>
           ) : null}
 
-          {viewMode === "sentences" ? (
-            <SentenceSections
-              sections={sentenceSections}
-              currentItemId={speech.currentItemId}
-              onPlayOne={speech.playOne}
-              onPlayQueue={speech.playQueue}
-            />
-          ) : (
-            <VocabularySections
-              sections={vocabularySections}
-              currentItemId={speech.currentItemId}
-              onPlayOne={speech.playOne}
-              onPlayQueue={speech.playQueue}
-            />
-          )}
+          <div className="practice-content-stack">
+            {isSentencesSelected ? (
+              <SentenceSections
+                sections={sentenceSections}
+                currentItemId={speech.currentItemId}
+                onPlayOne={speech.playOne}
+                onPlayQueue={speech.playQueue}
+              />
+            ) : null}
+            {isWordsSelected ? (
+              <VocabularySections
+                sections={vocabularySections}
+                currentItemId={speech.currentItemId}
+                onPlayOne={speech.playOne}
+                onPlayQueue={speech.playQueue}
+              />
+            ) : null}
+          </div>
         </section>
       </main>
     </div>

@@ -180,7 +180,7 @@ h3 {
   display: grid;
   grid-template-columns: 292px minmax(0, 1fr);
   gap: 26px;
-  width: min(1480px, 100%);
+  max-width: 1480px;
   margin: 0 auto;
   padding: 24px 28px 36px;
 }
@@ -356,6 +356,11 @@ h3 {
   gap: 28px;
 }
 
+.practice-content-stack {
+  display: grid;
+  gap: 32px;
+}
+
 .vocabulary-stack {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -387,7 +392,7 @@ h3 {
 
 .practice-row {
   display: grid;
-  grid-template-columns: 40px minmax(170px, 1.12fr) minmax(160px, 1fr) 40px;
+  grid-template-columns: 40px minmax(0, 1.12fr) minmax(0, 1fr) 40px;
   gap: 12px;
   align-items: center;
   min-height: 70px;
@@ -405,6 +410,7 @@ h3 {
 }
 
 .korean-text {
+  min-width: 0;
   color: #111817;
   font-family:
     "Noto Sans KR",
@@ -419,6 +425,7 @@ h3 {
 }
 
 .japanese-text {
+  min-width: 0;
   color: #34413c;
   font-size: 0.98rem;
   font-weight: 650;
