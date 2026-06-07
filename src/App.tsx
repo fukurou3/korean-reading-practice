@@ -117,46 +117,11 @@ export default function App() {
               onChange={(event) => speech.setRate(Number(event.target.value))}
             />
           </label>
-
-          <IconButton
-            label="停止"
-            title="停止"
-            variant="neutral"
-            disabled={!speech.isPlaying}
-            onClick={speech.stop}
-          >
-            <Square size={18} aria-hidden="true" />
-          </IconButton>
         </div>
       </header>
 
       <main className="workspace">
         <aside className="sidebar" aria-label="レッスン">
-          <div className="mode-switch" role="tablist" aria-label="表示">
-            <button
-              className={viewMode === "sentences" ? "active" : ""}
-              data-testid="sentences-tab"
-              type="button"
-              role="tab"
-              aria-selected={viewMode === "sentences"}
-              onClick={() => setViewMode("sentences")}
-            >
-              <BookOpen size={18} aria-hidden="true" />
-              例文
-            </button>
-            <button
-              className={viewMode === "words" ? "active" : ""}
-              data-testid="words-tab"
-              type="button"
-              role="tab"
-              aria-selected={viewMode === "words"}
-              onClick={() => setViewMode("words")}
-            >
-              <Languages size={18} aria-hidden="true" />
-              単語
-            </button>
-          </div>
-
           <div className="lesson-list">
             {content.lessons.map((lesson) => (
               <button
@@ -177,7 +142,31 @@ export default function App() {
 
         <section className="practice-area">
           <div className="practice-toolbar">
-            <div>
+            <div className="practice-title-group">
+              <div className="mode-switch" role="tablist" aria-label="表示">
+                <button
+                  className={viewMode === "sentences" ? "active" : ""}
+                  data-testid="sentences-tab"
+                  type="button"
+                  role="tab"
+                  aria-selected={viewMode === "sentences"}
+                  onClick={() => setViewMode("sentences")}
+                >
+                  <BookOpen size={18} aria-hidden="true" />
+                  例文
+                </button>
+                <button
+                  className={viewMode === "words" ? "active" : ""}
+                  data-testid="words-tab"
+                  type="button"
+                  role="tab"
+                  aria-selected={viewMode === "words"}
+                  onClick={() => setViewMode("words")}
+                >
+                  <Languages size={18} aria-hidden="true" />
+                  単語
+                </button>
+              </div>
               <p className="eyebrow">{viewMode === "sentences" ? "Sentence Queue" : "Word Queue"}</p>
               <h2>{practiceHeading}</h2>
             </div>
@@ -204,6 +193,15 @@ export default function App() {
                 <List size={18} aria-hidden="true" />
                 連続
               </button>
+              <IconButton
+                label="停止"
+                title="停止"
+                variant="neutral"
+                disabled={!speech.isPlaying}
+                onClick={speech.stop}
+              >
+                <Square size={18} aria-hidden="true" />
+              </IconButton>
             </div>
           </div>
 
@@ -360,14 +358,16 @@ function PracticeRows({
           data-testid="practice-row"
           className={`practice-row ${currentItemId === item.id ? "speaking" : ""}`}
         >
+          <div className="row-play-cell">
+            <IconButton label="単発" title="単発" onClick={() => onPlayOne(item)}>
+              <Play size={18} aria-hidden="true" />
+            </IconButton>
+          </div>
           <div className="korean-text" lang="ko">
             {item.korean}
           </div>
           <div className="japanese-text">{item.japanese}</div>
           <div className="row-actions">
-            <IconButton label="単発" title="単発" onClick={() => onPlayOne(item)}>
-              <Play size={18} aria-hidden="true" />
-            </IconButton>
             <IconButton label="ここから連続" title="ここから連続" onClick={() => onPlayQueue(items, item.id)}>
               <List size={18} aria-hidden="true" />
             </IconButton>
