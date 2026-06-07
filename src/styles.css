@@ -245,6 +245,11 @@ h3 {
   background: var(--surface);
 }
 
+.lesson-list button.selected {
+  border-color: rgba(18, 102, 87, 0.45);
+  background: #eef8f4;
+}
+
 .lesson-list span {
   display: grid;
   place-items: center;
@@ -255,6 +260,11 @@ h3 {
   color: var(--green-dark);
   font-size: 0.76rem;
   font-weight: 900;
+}
+
+.lesson-list button.selected span {
+  background: var(--green);
+  color: white;
 }
 
 .lesson-list strong {
@@ -354,11 +364,6 @@ h3 {
 .section-stack {
   display: grid;
   gap: 28px;
-}
-
-.practice-content-stack {
-  display: grid;
-  gap: 32px;
 }
 
 .vocabulary-stack {

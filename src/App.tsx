@@ -22,8 +22,6 @@ import type {
 
 type ViewMode = "sentences" | "words";
 
-type ViewModeSelection = Record<ViewMode, boolean>;
-
 type SentenceSection = {
   lesson: Lesson;
   group: LessonGroup;
@@ -38,23 +36,22 @@ type VocabularySection = {
 const content = rawContent as PracticeContent;
 
 export default function App() {
-  const [selectedViewModes, setSelectedViewModes] = useState<ViewModeSelection>({
-    sentences: true,
-    words: false,
-  });
-  const [selectedLessonId, setSelectedLessonId] = useState(content.lessons[0]?.id ?? "");
+  const [viewMode, setViewMode] = useState<ViewMode>("sentences");
+  const [selectedLessonIds, setSelectedLessonIds] = useState<string[]>(
+    content.lessons[0]?.id ? [content.lessons[0].id] : [],
+  );
   const [query, setQuery] = useState("");
   const speech = useKoreanSpeech();
 
   const normalizedQuery = query.trim().toLowerCase();
-  const isSentencesSelected = selectedViewModes.sentences;
-  const isWordsSelected = selectedViewModes.words;
-  const selectedLesson =
-    content.lessons.find((lesson) => lesson.id === selectedLessonId) ?? content.lessons[0];
+  const selectedLessons = useMemo(() => {
+    const selectedIds = new Set(selectedLessonIds);
+    return content.lessons.filter((lesson) => selectedIds.has(lesson.id));
+  }, [selectedLessonIds]);
 
   const sentenceSections = useMemo(
-    () => buildSentenceSections(content.lessons, selectedLesson, normalizedQuery),
-    [normalizedQuery, selectedLesson],
+    () => buildSentenceSections(content.lessons, selectedLessons, normalizedQuery),
+    [normalizedQuery, selectedLessons],
   );
 
   const vocabularySections = useMemo(
@@ -63,42 +60,33 @@ export default function App() {
   );
 
   const visibleItems = useMemo(() => {
-    const sentenceItems = isSentencesSelected
-      ? sentenceSections.flatMap((section) => section.items)
-      : [];
-    const wordItems = isWordsSelected ? vocabularySections.flatMap((section) => section.items) : [];
-    return [...sentenceItems, ...wordItems];
-  }, [isSentencesSelected, isWordsSelected, sentenceSections, vocabularySections]);
+    const sections = viewMode === "sentences" ? sentenceSections : vocabularySections;
+    return sections.flatMap((section) => section.items);
+  }, [sentenceSections, viewMode, vocabularySections]);
 
   const canPlay = speech.availability === "supported" && visibleItems.length > 0;
   const practiceHeading = normalizedQuery
     ? "検索結果"
-    : isSentencesSelected && isWordsSelected
-      ? "例文と単語"
-      : isSentencesSelected
-      ? selectedLesson?.title
+    : viewMode === "sentences"
+      ? selectedLessons.length === 1
+        ? selectedLessons[0]?.title
+        : `選択中の文法（${selectedLessons.length}件）`
       : "登場単語一覧";
-  const queueLabel =
-    isSentencesSelected && isWordsSelected
-      ? "Practice Queue"
-      : isSentencesSelected
-        ? "Sentence Queue"
-        : "Word Queue";
 
-  const toggleViewMode = (mode: ViewMode) => {
-    setSelectedViewModes((current) => {
-      const enabledCount = Number(current.sentences) + Number(current.words);
-      if (current[mode] && enabledCount === 1) {
-        return current;
+  const toggleLessonSelection = (lessonId: string) => {
+    setSelectedLessonIds((current) => {
+      if (current.includes(lessonId)) {
+        if (current.length === 1) {
+          return current;
+        }
+        return current.filter((id) => id !== lessonId);
       }
-      return {
-        ...current,
-        [mode]: !current[mode],
-      };
+
+      return [...current, lessonId];
     });
   };
 
-  if (!selectedLesson) {
+  if (content.lessons.length === 0) {
     return <div className="app unavailable">教材データがありません。</div>;
   }
 
@@ -152,16 +140,17 @@ export default function App() {
       </header>
 
       <main className="workspace">
-        <aside className="sidebar" aria-label="レッスン">
+        <aside className="sidebar" aria-label="文法">
           <div className="lesson-list">
             {content.lessons.map((lesson) => (
               <button
                 key={lesson.id}
-                className={lesson.id === selectedLesson.id ? "selected" : ""}
+                className={selectedLessonIds.includes(lesson.id) ? "selected" : ""}
                 type="button"
+                aria-pressed={selectedLessonIds.includes(lesson.id)}
                 onClick={() => {
-                  setSelectedLessonId(lesson.id);
-                  setSelectedViewModes((current) => ({ ...current, sentences: true }));
+                  toggleLessonSelection(lesson.id);
+                  setViewMode("sentences");
                 }}
               >
                 <span>{String(lesson.number).padStart(2, "0")}</span>
@@ -174,29 +163,31 @@ export default function App() {
         <section className="practice-area">
           <div className="practice-toolbar">
             <div className="practice-title-group">
-              <div className="mode-switch" role="group" aria-label="表示">
+              <div className="mode-switch" role="tablist" aria-label="表示">
                 <button
-                  className={isSentencesSelected ? "active" : ""}
+                  className={viewMode === "sentences" ? "active" : ""}
                   data-testid="sentences-tab"
                   type="button"
-                  aria-pressed={isSentencesSelected}
-                  onClick={() => toggleViewMode("sentences")}
+                  role="tab"
+                  aria-selected={viewMode === "sentences"}
+                  onClick={() => setViewMode("sentences")}
                 >
                   <BookOpen size={18} aria-hidden="true" />
                   例文
                 </button>
                 <button
-                  className={isWordsSelected ? "active" : ""}
+                  className={viewMode === "words" ? "active" : ""}
                   data-testid="words-tab"
                   type="button"
-                  aria-pressed={isWordsSelected}
-                  onClick={() => toggleViewMode("words")}
+                  role="tab"
+                  aria-selected={viewMode === "words"}
+                  onClick={() => setViewMode("words")}
                 >
                   <Languages size={18} aria-hidden="true" />
                   単語
                 </button>
               </div>
-              <p className="eyebrow">{queueLabel}</p>
+              <p className="eyebrow">{viewMode === "sentences" ? "Sentence Queue" : "Word Queue"}</p>
               <h2>{practiceHeading}</h2>
             </div>
 
@@ -246,24 +237,21 @@ export default function App() {
             </div>
           ) : null}
 
-          <div className="practice-content-stack">
-            {isSentencesSelected ? (
-              <SentenceSections
-                sections={sentenceSections}
-                currentItemId={speech.currentItemId}
-                onPlayOne={speech.playOne}
-                onPlayQueue={speech.playQueue}
-              />
-            ) : null}
-            {isWordsSelected ? (
-              <VocabularySections
-                sections={vocabularySections}
-                currentItemId={speech.currentItemId}
-                onPlayOne={speech.playOne}
-                onPlayQueue={speech.playQueue}
-              />
-            ) : null}
-          </div>
+          {viewMode === "sentences" ? (
+            <SentenceSections
+              sections={sentenceSections}
+              currentItemId={speech.currentItemId}
+              onPlayOne={speech.playOne}
+              onPlayQueue={speech.playQueue}
+            />
+          ) : (
+            <VocabularySections
+              sections={vocabularySections}
+              currentItemId={speech.currentItemId}
+              onPlayOne={speech.playOne}
+              onPlayQueue={speech.playQueue}
+            />
+          )}
         </section>
       </main>
     </div>
@@ -288,7 +276,7 @@ function SentenceSections({
   return (
     <div className="section-stack">
       {sections.map((section) => (
-        <section className="practice-section" key={section.group.id}>
+        <section className="practice-section" key={`${section.lesson.id}-${section.group.id}`}>
           <div className="section-heading">
             <div>
               <p className="eyebrow">
@@ -441,10 +429,10 @@ function IconButton({
 
 function buildSentenceSections(
   lessons: Lesson[],
-  selectedLesson: Lesson | undefined,
+  selectedLessons: Lesson[],
   normalizedQuery: string,
 ): SentenceSection[] {
-  const sourceLessons = normalizedQuery ? lessons : selectedLesson ? [selectedLesson] : lessons;
+  const sourceLessons = normalizedQuery ? lessons : selectedLessons.length > 0 ? selectedLessons : lessons;
 
   return sourceLessons.flatMap((lesson) =>
     lesson.groups
