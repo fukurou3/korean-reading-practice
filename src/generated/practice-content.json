@@ -1,0 +1,892 @@
+{
+  "schemaVersion": 1,
+  "sourceFormat": "markdown-table-v1",
+  "vocabularyCategories": [
+    {
+      "id": "vocabulary-1",
+      "title": "人",
+      "words": [
+        {
+          "id": "vocabulary-1-word-1",
+          "korean": "저",
+          "japanese": "私"
+        },
+        {
+          "id": "vocabulary-1-word-2",
+          "korean": "친구",
+          "japanese": "友達"
+        },
+        {
+          "id": "vocabulary-1-word-3",
+          "korean": "선생님",
+          "japanese": "先生"
+        },
+        {
+          "id": "vocabulary-1-word-4",
+          "korean": "학생",
+          "japanese": "学生"
+        },
+        {
+          "id": "vocabulary-1-word-5",
+          "korean": "사람",
+          "japanese": "人"
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-2",
+      "title": "場所",
+      "words": [
+        {
+          "id": "vocabulary-2-word-1",
+          "korean": "학교",
+          "japanese": "学校"
+        },
+        {
+          "id": "vocabulary-2-word-2",
+          "korean": "집",
+          "japanese": "家"
+        },
+        {
+          "id": "vocabulary-2-word-3",
+          "korean": "회사",
+          "japanese": "会社"
+        },
+        {
+          "id": "vocabulary-2-word-4",
+          "korean": "한국",
+          "japanese": "韓国"
+        },
+        {
+          "id": "vocabulary-2-word-5",
+          "korean": "일본",
+          "japanese": "日本"
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-3",
+      "title": "物・対象",
+      "words": [
+        {
+          "id": "vocabulary-3-word-1",
+          "korean": "책",
+          "japanese": "本"
+        },
+        {
+          "id": "vocabulary-3-word-2",
+          "korean": "물",
+          "japanese": "水"
+        },
+        {
+          "id": "vocabulary-3-word-3",
+          "korean": "음식",
+          "japanese": "食べ物"
+        },
+        {
+          "id": "vocabulary-3-word-4",
+          "korean": "영화",
+          "japanese": "映画"
+        },
+        {
+          "id": "vocabulary-3-word-5",
+          "korean": "음악",
+          "japanese": "音楽"
+        }
+      ]
+    },
+    {
+      "id": "vocabulary-4",
+      "title": "動詞",
+      "words": [
+        {
+          "id": "vocabulary-4-word-1",
+          "korean": "공부하다",
+          "japanese": "勉強する"
+        },
+        {
+          "id": "vocabulary-4-word-2",
+          "korean": "먹다",
+          "japanese": "食べる"
+        },
+        {
+          "id": "vocabulary-4-word-3",
+          "korean": "마시다",
+          "japanese": "飲む"
+        },
+        {
+          "id": "vocabulary-4-word-4",
+          "korean": "가다",
+          "japanese": "行く"
+        },
+        {
+          "id": "vocabulary-4-word-5",
+          "korean": "오다",
+          "japanese": "来る"
+        },
+        {
+          "id": "vocabulary-4-word-6",
+          "korean": "보다",
+          "japanese": "見る"
+        },
+        {
+          "id": "vocabulary-4-word-7",
+          "korean": "듣다",
+          "japanese": "聞く"
+        },
+        {
+          "id": "vocabulary-4-word-8",
+          "korean": "만나다",
+          "japanese": "会う"
+        },
+        {
+          "id": "vocabulary-4-word-9",
+          "korean": "일하다",
+          "japanese": "働く"
+        },
+        {
+          "id": "vocabulary-4-word-10",
+          "korean": "쉬다",
+          "japanese": "休む"
+        }
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "lesson-01",
+      "number": 1,
+      "title": "은/는（〜は）",
+      "groups": [
+        {
+          "id": "lesson-01-group-1",
+          "title": "基本",
+          "orderHint": "順番：私 → 友達 → 先生 → 学生 → 人",
+          "examples": [
+            {
+              "id": "lesson-01-group-1-example-1",
+              "korean": "저는 학생이에요.",
+              "japanese": "私は学生です。"
+            },
+            {
+              "id": "lesson-01-group-1-example-2",
+              "korean": "친구는 학생이에요.",
+              "japanese": "友達は学生です。"
+            },
+            {
+              "id": "lesson-01-group-1-example-3",
+              "korean": "선생님은 학생이에요.",
+              "japanese": "先生は学生です。"
+            },
+            {
+              "id": "lesson-01-group-1-example-4",
+              "korean": "학생은 학생이에요.",
+              "japanese": "学生は学生です。"
+            },
+            {
+              "id": "lesson-01-group-1-example-5",
+              "korean": "사람은 학생이에요.",
+              "japanese": "人は学生です。"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "「先生は学生です」は意味としては変だけど、今は文法パターンを身体に入れる練習なのでOK。自然さより型の固定を優先。"
+      ]
+    },
+    {
+      "id": "lesson-02",
+      "number": 2,
+      "title": "이/가（〜が）",
+      "groups": [
+        {
+          "id": "lesson-02-group-1",
+          "title": "基本",
+          "orderHint": "順番：私 → 友達 → 先生 → 学生 → 人",
+          "examples": [
+            {
+              "id": "lesson-02-group-1-example-1",
+              "korean": "제가 와요.",
+              "japanese": "私が来ます。"
+            },
+            {
+              "id": "lesson-02-group-1-example-2",
+              "korean": "친구가 와요.",
+              "japanese": "友達が来ます。"
+            },
+            {
+              "id": "lesson-02-group-1-example-3",
+              "korean": "선생님이 와요.",
+              "japanese": "先生が来ます。"
+            },
+            {
+              "id": "lesson-02-group-1-example-4",
+              "korean": "학생이 와요.",
+              "japanese": "学生が来ます。"
+            },
+            {
+              "id": "lesson-02-group-1-example-5",
+              "korean": "사람이 와요.",
+              "japanese": "人が来ます。"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "「저가」ではなく、会話では普通 제가 を使う。"
+      ]
+    },
+    {
+      "id": "lesson-03",
+      "number": 3,
+      "title": "을/를（〜を）",
+      "groups": [
+        {
+          "id": "lesson-03-group-1",
+          "title": "基本",
+          "orderHint": "順番：本 → 水 → 食べ物 → 映画 → 音楽",
+          "examples": [
+            {
+              "id": "lesson-03-group-1-example-1",
+              "korean": "책을 봐요.",
+              "japanese": "本を見ます。"
+            },
+            {
+              "id": "lesson-03-group-1-example-2",
+              "korean": "물을 봐요.",
+              "japanese": "水を見ます。"
+            },
+            {
+              "id": "lesson-03-group-1-example-3",
+              "korean": "음식을 봐요.",
+              "japanese": "食べ物を見ます。"
+            },
+            {
+              "id": "lesson-03-group-1-example-4",
+              "korean": "영화를 봐요.",
+              "japanese": "映画を見ます。"
+            },
+            {
+              "id": "lesson-03-group-1-example-5",
+              "korean": "음악을 봐요.",
+              "japanese": "音楽を見ます。"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "「音楽を見る」は不自然。だけど、ここでは 을/를 の形を固定する教材として割り切る。自然な例にすると動詞がバラけて、学習効率が落ちる。"
+      ]
+    },
+    {
+      "id": "lesson-04",
+      "number": 4,
+      "title": "에（〜に）",
+      "groups": [
+        {
+          "id": "lesson-04-group-1",
+          "title": "基本",
+          "orderHint": "順番：学校 → 家 → 会社 → 韓国 → 日本",
+          "examples": [
+            {
+              "id": "lesson-04-group-1-example-1",
+              "korean": "학교에 가요.",
+              "japanese": "学校に行きます。"
+            },
+            {
+              "id": "lesson-04-group-1-example-2",
+              "korean": "집에 가요.",
+              "japanese": "家に行きます。"
+            },
+            {
+              "id": "lesson-04-group-1-example-3",
+              "korean": "회사에 가요.",
+              "japanese": "会社に行きます。"
+            },
+            {
+              "id": "lesson-04-group-1-example-4",
+              "korean": "한국에 가요.",
+              "japanese": "韓国に行きます。"
+            },
+            {
+              "id": "lesson-04-group-1-example-5",
+              "korean": "일본에 가요.",
+              "japanese": "日本に行きます。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-05",
+      "number": 5,
+      "title": "에서（〜で）",
+      "groups": [
+        {
+          "id": "lesson-05-group-1",
+          "title": "基本",
+          "orderHint": "順番：学校 → 家 → 会社 → 韓国 → 日本",
+          "examples": [
+            {
+              "id": "lesson-05-group-1-example-1",
+              "korean": "학교에서 공부해요.",
+              "japanese": "学校で勉強します。"
+            },
+            {
+              "id": "lesson-05-group-1-example-2",
+              "korean": "집에서 공부해요.",
+              "japanese": "家で勉強します。"
+            },
+            {
+              "id": "lesson-05-group-1-example-3",
+              "korean": "회사에서 공부해요.",
+              "japanese": "会社で勉強します。"
+            },
+            {
+              "id": "lesson-05-group-1-example-4",
+              "korean": "한국에서 공부해요.",
+              "japanese": "韓国で勉強します。"
+            },
+            {
+              "id": "lesson-05-group-1-example-5",
+              "korean": "일본에서 공부해요.",
+              "japanese": "日本で勉強します。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-06",
+      "number": 6,
+      "title": "도（〜も）",
+      "groups": [
+        {
+          "id": "lesson-06-group-1",
+          "title": "人セット",
+          "orderHint": "順番：私 → 友達 → 先生 → 学生 → 人",
+          "examples": [
+            {
+              "id": "lesson-06-group-1-example-1",
+              "korean": "저도 가요.",
+              "japanese": "私も行きます。"
+            },
+            {
+              "id": "lesson-06-group-1-example-2",
+              "korean": "친구도 가요.",
+              "japanese": "友達も行きます。"
+            },
+            {
+              "id": "lesson-06-group-1-example-3",
+              "korean": "선생님도 가요.",
+              "japanese": "先生も行きます。"
+            },
+            {
+              "id": "lesson-06-group-1-example-4",
+              "korean": "학생도 가요.",
+              "japanese": "学生も行きます。"
+            },
+            {
+              "id": "lesson-06-group-1-example-5",
+              "korean": "사람도 가요.",
+              "japanese": "人も行きます。"
+            }
+          ]
+        },
+        {
+          "id": "lesson-06-group-2",
+          "title": "場所セット",
+          "orderHint": "順番：学校 → 家 → 会社 → 韓国 → 日本",
+          "examples": [
+            {
+              "id": "lesson-06-group-2-example-1",
+              "korean": "학교도 좋아요.",
+              "japanese": "学校も好きです。"
+            },
+            {
+              "id": "lesson-06-group-2-example-2",
+              "korean": "집도 좋아요.",
+              "japanese": "家も好きです。"
+            },
+            {
+              "id": "lesson-06-group-2-example-3",
+              "korean": "회사도 좋아요.",
+              "japanese": "会社も好きです。"
+            },
+            {
+              "id": "lesson-06-group-2-example-4",
+              "korean": "한국도 좋아요.",
+              "japanese": "韓国も好きです。"
+            },
+            {
+              "id": "lesson-06-group-2-example-5",
+              "korean": "일본도 좋아요.",
+              "japanese": "日本も好きです。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-07",
+      "number": 7,
+      "title": "만（〜だけ）",
+      "groups": [
+        {
+          "id": "lesson-07-group-1",
+          "title": "人セット",
+          "orderHint": "順番：私 → 友達 → 先生 → 学生 → 人",
+          "examples": [
+            {
+              "id": "lesson-07-group-1-example-1",
+              "korean": "저만 가요.",
+              "japanese": "私だけ行きます。"
+            },
+            {
+              "id": "lesson-07-group-1-example-2",
+              "korean": "친구만 가요.",
+              "japanese": "友達だけ行きます。"
+            },
+            {
+              "id": "lesson-07-group-1-example-3",
+              "korean": "선생님만 가요.",
+              "japanese": "先生だけ行きます。"
+            },
+            {
+              "id": "lesson-07-group-1-example-4",
+              "korean": "학생만 가요.",
+              "japanese": "学生だけ行きます。"
+            },
+            {
+              "id": "lesson-07-group-1-example-5",
+              "korean": "사람만 가요.",
+              "japanese": "人だけ行きます。"
+            }
+          ]
+        },
+        {
+          "id": "lesson-07-group-2",
+          "title": "場所セット",
+          "orderHint": "順番：学校 → 家 → 会社 → 韓国 → 日本",
+          "examples": [
+            {
+              "id": "lesson-07-group-2-example-1",
+              "korean": "학교만 가요.",
+              "japanese": "学校だけ行きます。"
+            },
+            {
+              "id": "lesson-07-group-2-example-2",
+              "korean": "집만 가요.",
+              "japanese": "家だけ行きます。"
+            },
+            {
+              "id": "lesson-07-group-2-example-3",
+              "korean": "회사만 가요.",
+              "japanese": "会社だけ行きます。"
+            },
+            {
+              "id": "lesson-07-group-2-example-4",
+              "korean": "한국만 가요.",
+              "japanese": "韓国だけ行きます。"
+            },
+            {
+              "id": "lesson-07-group-2-example-5",
+              "korean": "일본만 가요.",
+              "japanese": "日本だけ行きます。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-08",
+      "number": 8,
+      "title": "現在形（〜します）",
+      "groups": [
+        {
+          "id": "lesson-08-group-1",
+          "title": "基本",
+          "orderHint": "順番：勉強する → 食べる → 飲む → 行く → 来る → 見る → 聞く → 会う → 働く → 休む",
+          "examples": [
+            {
+              "id": "lesson-08-group-1-example-1",
+              "korean": "공부해요.",
+              "japanese": "勉強します。"
+            },
+            {
+              "id": "lesson-08-group-1-example-2",
+              "korean": "먹어요.",
+              "japanese": "食べます。"
+            },
+            {
+              "id": "lesson-08-group-1-example-3",
+              "korean": "마셔요.",
+              "japanese": "飲みます。"
+            },
+            {
+              "id": "lesson-08-group-1-example-4",
+              "korean": "가요.",
+              "japanese": "行きます。"
+            },
+            {
+              "id": "lesson-08-group-1-example-5",
+              "korean": "와요.",
+              "japanese": "来ます。"
+            },
+            {
+              "id": "lesson-08-group-1-example-6",
+              "korean": "봐요.",
+              "japanese": "見ます。"
+            },
+            {
+              "id": "lesson-08-group-1-example-7",
+              "korean": "들어요.",
+              "japanese": "聞きます。"
+            },
+            {
+              "id": "lesson-08-group-1-example-8",
+              "korean": "만나요.",
+              "japanese": "会います。"
+            },
+            {
+              "id": "lesson-08-group-1-example-9",
+              "korean": "일해요.",
+              "japanese": "働きます。"
+            },
+            {
+              "id": "lesson-08-group-1-example-10",
+              "korean": "쉬어요.",
+              "japanese": "休みます。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-09",
+      "number": 9,
+      "title": "過去形（〜しました）",
+      "groups": [
+        {
+          "id": "lesson-09-group-1",
+          "title": "基本",
+          "orderHint": "順番は現在形と完全一致。",
+          "examples": [
+            {
+              "id": "lesson-09-group-1-example-1",
+              "korean": "공부했어요.",
+              "japanese": "勉強しました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-2",
+              "korean": "먹었어요.",
+              "japanese": "食べました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-3",
+              "korean": "마셨어요.",
+              "japanese": "飲みました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-4",
+              "korean": "갔어요.",
+              "japanese": "行きました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-5",
+              "korean": "왔어요.",
+              "japanese": "来ました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-6",
+              "korean": "봤어요.",
+              "japanese": "見ました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-7",
+              "korean": "들었어요.",
+              "japanese": "聞きました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-8",
+              "korean": "만났어요.",
+              "japanese": "会いました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-9",
+              "korean": "일했어요.",
+              "japanese": "働きました。"
+            },
+            {
+              "id": "lesson-09-group-1-example-10",
+              "korean": "쉬었어요.",
+              "japanese": "休みました。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-10",
+      "number": 10,
+      "title": "未来形（〜する予定です）",
+      "groups": [
+        {
+          "id": "lesson-10-group-1",
+          "title": "基本",
+          "orderHint": "順番は現在形と完全一致。",
+          "examples": [
+            {
+              "id": "lesson-10-group-1-example-1",
+              "korean": "공부할 거예요.",
+              "japanese": "勉強する予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-2",
+              "korean": "먹을 거예요.",
+              "japanese": "食べる予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-3",
+              "korean": "마실 거예요.",
+              "japanese": "飲む予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-4",
+              "korean": "갈 거예요.",
+              "japanese": "行く予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-5",
+              "korean": "올 거예요.",
+              "japanese": "来る予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-6",
+              "korean": "볼 거예요.",
+              "japanese": "見る予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-7",
+              "korean": "들을 거예요.",
+              "japanese": "聞く予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-8",
+              "korean": "만날 거예요.",
+              "japanese": "会う予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-9",
+              "korean": "일할 거예요.",
+              "japanese": "働く予定です。"
+            },
+            {
+              "id": "lesson-10-group-1-example-10",
+              "korean": "쉴 거예요.",
+              "japanese": "休む予定です。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-11",
+      "number": 11,
+      "title": "進行形（〜しています）",
+      "groups": [
+        {
+          "id": "lesson-11-group-1",
+          "title": "基本",
+          "orderHint": "順番は現在形と完全一致。",
+          "examples": [
+            {
+              "id": "lesson-11-group-1-example-1",
+              "korean": "공부하고 있어요.",
+              "japanese": "勉強しています。"
+            },
+            {
+              "id": "lesson-11-group-1-example-2",
+              "korean": "먹고 있어요.",
+              "japanese": "食べています。"
+            },
+            {
+              "id": "lesson-11-group-1-example-3",
+              "korean": "마시고 있어요.",
+              "japanese": "飲んでいます。"
+            },
+            {
+              "id": "lesson-11-group-1-example-4",
+              "korean": "가고 있어요.",
+              "japanese": "行っています。"
+            },
+            {
+              "id": "lesson-11-group-1-example-5",
+              "korean": "오고 있어요.",
+              "japanese": "来ています。"
+            },
+            {
+              "id": "lesson-11-group-1-example-6",
+              "korean": "보고 있어요.",
+              "japanese": "見ています。"
+            },
+            {
+              "id": "lesson-11-group-1-example-7",
+              "korean": "듣고 있어요.",
+              "japanese": "聞いています。"
+            },
+            {
+              "id": "lesson-11-group-1-example-8",
+              "korean": "만나고 있어요.",
+              "japanese": "会っています。"
+            },
+            {
+              "id": "lesson-11-group-1-example-9",
+              "korean": "일하고 있어요.",
+              "japanese": "働いています。"
+            },
+            {
+              "id": "lesson-11-group-1-example-10",
+              "korean": "쉬고 있어요.",
+              "japanese": "休んでいます。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-12",
+      "number": 12,
+      "title": "そして：그리고",
+      "groups": [
+        {
+          "id": "lesson-12-group-1",
+          "title": "基本",
+          "orderHint": "順番：勉強 → 食べる → 飲む → 行く → 休む",
+          "examples": [
+            {
+              "id": "lesson-12-group-1-example-1",
+              "korean": "공부해요. 그리고 쉬어요.",
+              "japanese": "勉強します。そして休みます。"
+            },
+            {
+              "id": "lesson-12-group-1-example-2",
+              "korean": "먹어요. 그리고 쉬어요.",
+              "japanese": "食べます。そして休みます。"
+            },
+            {
+              "id": "lesson-12-group-1-example-3",
+              "korean": "마셔요. 그리고 쉬어요.",
+              "japanese": "飲みます。そして休みます。"
+            },
+            {
+              "id": "lesson-12-group-1-example-4",
+              "korean": "가요. 그리고 쉬어요.",
+              "japanese": "行きます。そして休みます。"
+            },
+            {
+              "id": "lesson-12-group-1-example-5",
+              "korean": "일해요. 그리고 쉬어요.",
+              "japanese": "働きます。そして休みます。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-13",
+      "number": 13,
+      "title": "しかし：하지만",
+      "groups": [
+        {
+          "id": "lesson-13-group-1",
+          "title": "基本",
+          "orderHint": "順番：勉強 → 食べる → 飲む → 行く → 働く",
+          "examples": [
+            {
+              "id": "lesson-13-group-1-example-1",
+              "korean": "공부해요. 하지만 어려워요.",
+              "japanese": "勉強します。しかし難しいです。"
+            },
+            {
+              "id": "lesson-13-group-1-example-2",
+              "korean": "먹어요. 하지만 배불러요.",
+              "japanese": "食べます。しかしお腹いっぱいです。"
+            },
+            {
+              "id": "lesson-13-group-1-example-3",
+              "korean": "마셔요. 하지만 맛없어요.",
+              "japanese": "飲みます。しかしおいしくないです。"
+            },
+            {
+              "id": "lesson-13-group-1-example-4",
+              "korean": "가요. 하지만 멀어요.",
+              "japanese": "行きます。しかし遠いです。"
+            },
+            {
+              "id": "lesson-13-group-1-example-5",
+              "korean": "일해요. 하지만 피곤해요.",
+              "japanese": "働きます。しかし疲れます。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "lesson-14",
+      "number": 14,
+      "title": "だから：그래서",
+      "groups": [
+        {
+          "id": "lesson-14-group-1",
+          "title": "基本",
+          "orderHint": "順番：お腹が空く → 喉が渇く → 疲れる → 試験がある → 友達が来る",
+          "examples": [
+            {
+              "id": "lesson-14-group-1-example-1",
+              "korean": "배가 고파요. 그래서 먹어요.",
+              "japanese": "お腹が空いています。だから食べます。"
+            },
+            {
+              "id": "lesson-14-group-1-example-2",
+              "korean": "목이 말라요. 그래서 마셔요.",
+              "japanese": "喉が渇いています。だから飲みます。"
+            },
+            {
+              "id": "lesson-14-group-1-example-3",
+              "korean": "피곤해요. 그래서 쉬어요.",
+              "japanese": "疲れています。だから休みます。"
+            },
+            {
+              "id": "lesson-14-group-1-example-4",
+              "korean": "시험이 있어요. 그래서 공부해요.",
+              "japanese": "試験があります。だから勉強します。"
+            },
+            {
+              "id": "lesson-14-group-1-example-5",
+              "korean": "친구가 와요. 그래서 만나요.",
+              "japanese": "友達が来ます。だから会います。"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "stats": {
+    "vocabularyCount": 25,
+    "lessonCount": 14,
+    "exampleCount": 100
+  }
+}
