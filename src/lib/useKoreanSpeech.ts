@@ -3,7 +3,13 @@ import type { SpeechPracticeItem } from "../types";
 
 type SpeechAvailability = "supported" | "unsupported";
 
-const DEFAULT_RATE = 0.92;
+export const SPEECH_RATE = {
+  default: 0.92,
+  max: 1.15,
+  min: 0.1,
+  step: 0.05,
+} as const;
+
 const QUEUE_GAP_MS = 240;
 
 export function useKoreanSpeech() {
@@ -16,7 +22,7 @@ export function useKoreanSpeech() {
 
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoiceURI, setSelectedVoiceURI] = useState("");
-  const [rate, setRate] = useState(DEFAULT_RATE);
+  const [rate, setRawRate] = useState<number>(SPEECH_RATE.default);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentItemId, setCurrentItemId] = useState<string | null>(null);
   const runIdRef = useRef(0);
@@ -60,6 +66,10 @@ export function useKoreanSpeech() {
     () => voices.find((voice) => voice.voiceURI === selectedVoiceURI) ?? null,
     [selectedVoiceURI, voices],
   );
+
+  const setRate = useCallback((nextRate: number) => {
+    setRawRate(clampSpeechRate(nextRate));
+  }, []);
 
   const stop = useCallback(() => {
     runIdRef.current += 1;
@@ -182,6 +192,10 @@ function pickKoreanVoice(voices: SpeechSynthesisVoice[]) {
     voices.find((voice) => voice.lang.toLowerCase().startsWith("ko")) ??
     null
   );
+}
+
+function clampSpeechRate(rate: number) {
+  return Math.min(SPEECH_RATE.max, Math.max(SPEECH_RATE.min, rate));
 }
 
 function wait(milliseconds: number) {

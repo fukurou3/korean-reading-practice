@@ -11,7 +11,7 @@ import {
 import { useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import rawContent from "./generated/practice-content.json";
-import { useKoreanSpeech } from "./lib/useKoreanSpeech";
+import { SPEECH_RATE, useKoreanSpeech } from "./lib/useKoreanSpeech";
 import type {
   Lesson,
   LessonGroup,
@@ -129,9 +129,9 @@ export default function App() {
               aria-label="速度"
               data-testid="rate-slider"
               type="range"
-              min="0.7"
-              max="1.15"
-              step="0.05"
+              min={SPEECH_RATE.min}
+              max={SPEECH_RATE.max}
+              step={SPEECH_RATE.step}
               value={speech.rate}
               onChange={(event) => speech.setRate(Number(event.target.value))}
             />
