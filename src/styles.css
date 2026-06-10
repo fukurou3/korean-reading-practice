@@ -21,6 +21,7 @@
   --amber: #9a6400;
   --rose: #a64258;
   --shadow: 0 10px 24px rgba(27, 37, 33, 0.08);
+  --topbar-height: 84px;
 }
 
 * {
@@ -186,15 +187,38 @@ h3 {
 }
 
 .sidebar {
+  position: sticky;
+  top: calc(var(--topbar-height) + 24px);
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--topbar-height) - 48px);
+  min-height: 0;
+  min-width: 0;
   padding-right: 22px;
   border-right: 1px solid var(--line);
 }
 
+.sidebar-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.sidebar-summary strong {
+  color: var(--green-dark);
+}
+
 .mode-switch {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 4px;
-  width: 190px;
+  width: 292px;
   margin-bottom: 14px;
   padding: 4px;
   border-radius: 8px;
@@ -223,6 +247,13 @@ h3 {
 .lesson-list {
   display: grid;
   gap: 6px;
+  min-height: 0;
+  min-width: 0;
+  max-width: 100%;
+  padding-right: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
 }
 
 .lesson-list button {
@@ -382,14 +413,6 @@ h3 {
   margin-bottom: 12px;
 }
 
-.order-hint {
-  margin: 8px 0 0;
-  color: var(--blue);
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.45;
-}
-
 .practice-rows {
   display: grid;
   gap: 8px;
@@ -397,7 +420,7 @@ h3 {
 
 .practice-row {
   display: grid;
-  grid-template-columns: 40px minmax(0, 1.12fr) minmax(0, 1fr) 40px;
+  grid-template-columns: 40px minmax(0, 1.12fr) minmax(0, 1fr);
   gap: 12px;
   align-items: center;
   min-height: 70px;
@@ -443,11 +466,6 @@ h3 {
   justify-content: flex-start;
 }
 
-.row-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .content-notes {
   display: grid;
   gap: 8px;
@@ -462,6 +480,217 @@ h3 {
   font-size: 0.9rem;
   font-weight: 650;
   line-height: 1.6;
+}
+
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--green-dark);
+  font-weight: 900;
+}
+
+.secondary-action:hover {
+  border-color: #aab9b0;
+  box-shadow: 0 4px 12px rgba(27, 37, 33, 0.08);
+}
+
+.flash-panel {
+  display: grid;
+  gap: 14px;
+  max-width: 900px;
+}
+
+.flash-session {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.flash-session h3 {
+  font-size: 1.18rem;
+}
+
+.flash-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.flash-status span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.flash-progress {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e1e7e3;
+}
+
+.flash-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  transition: width 180ms ease;
+}
+
+.flash-card {
+  display: grid;
+  align-content: center;
+  gap: 22px;
+  width: 100%;
+  min-height: clamp(330px, 52vh, 520px);
+  padding: clamp(22px, 4vw, 42px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+button.flash-card {
+  cursor: pointer;
+}
+
+button.flash-card:hover {
+  border-color: rgba(18, 102, 87, 0.5);
+}
+
+.flash-context {
+  justify-self: center;
+  max-width: 100%;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 850;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.flash-korean {
+  color: #0f1715;
+  font-family:
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple SD Gothic Neo",
+    system-ui,
+    sans-serif;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+}
+
+.flash-answer {
+  min-height: 2.4em;
+  color: #2f3d38;
+  font-size: clamp(1.1rem, 2.4vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.flash-card.answer-hidden .flash-answer {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.flash-card.answer-visible .flash-answer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flash-complete-card {
+  justify-items: center;
+}
+
+.flash-complete-card h3 {
+  font-size: 2rem;
+}
+
+.flash-complete-card p:not(.eyebrow) {
+  margin: 0;
+  color: #33403b;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.flash-complete-actions,
+.flash-controls,
+.flash-settings {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.flash-complete-actions,
+.flash-controls {
+  justify-content: center;
+}
+
+.flash-answer-action {
+  min-width: 134px;
+}
+
+.flash-auto-action {
+  min-width: 128px;
+}
+
+.flash-settings {
+  justify-content: flex-start;
+  padding-top: 2px;
+}
+
+.flash-toggle,
+.flash-pace {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: #34413c;
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.flash-toggle input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--green);
+}
+
+.flash-pace select {
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #202423;
+  font-weight: 850;
 }
 
 @media (max-width: 980px) {
@@ -482,16 +711,25 @@ h3 {
   }
 
   .sidebar {
+    position: static;
+    max-height: none;
     padding-right: 0;
     border-right: 0;
+  }
+
+  .sidebar-summary {
+    margin-bottom: 8px;
   }
 
   .lesson-list {
     display: flex;
     gap: 8px;
+    width: calc(100% + 40px);
+    max-width: calc(100% + 40px);
     margin: 0 -20px;
     padding: 0 20px 4px;
     overflow-x: auto;
+    overflow-y: hidden;
     overscroll-behavior-x: contain;
     scrollbar-width: thin;
   }
@@ -509,11 +747,15 @@ h3 {
   }
 
   .mode-switch {
-    width: min(260px, 100%);
+    width: min(360px, 100%);
   }
 
   .vocabulary-stack {
     grid-template-columns: 1fr;
+  }
+
+  .flash-panel {
+    max-width: none;
   }
 }
 
@@ -537,12 +779,14 @@ h3 {
   }
 
   .lesson-list {
+    width: calc(100% + 32px);
+    max-width: calc(100% + 32px);
     margin: 0 -16px;
     padding-inline: 16px;
   }
 
   .practice-row {
-    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    grid-template-columns: 40px minmax(0, 1fr);
     gap: 8px;
   }
 
@@ -556,10 +800,40 @@ h3 {
     grid-column: 2;
   }
 
-  .row-actions {
-    grid-column: 3;
-    grid-row: 1 / 3;
-    align-self: center;
-    justify-content: flex-end;
+  .flash-card {
+    min-height: min(58vh, 440px);
+    padding: 22px 18px;
+  }
+
+  .flash-session {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .flash-controls {
+    position: sticky;
+    bottom: 0;
+    z-index: 4;
+    margin: 0 -16px;
+    padding: 10px 16px;
+    border-top: 1px solid var(--line);
+    background: rgba(245, 246, 243, 0.96);
+    backdrop-filter: blur(8px);
+  }
+
+  .flash-answer-action,
+  .flash-auto-action {
+    flex: 1 1 132px;
+  }
+
+  .flash-settings {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .flash-toggle,
+  .flash-pace {
+    width: 100%;
+    justify-content: space-between;
   }
 }
