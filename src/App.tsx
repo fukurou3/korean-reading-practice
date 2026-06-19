@@ -77,6 +77,7 @@ const FLASH_PACE_OPTIONS: Record<
 export default function App() {
   const [viewMode, setViewMode] = useState<ViewMode>("sentences");
   const [practiceMode, setPracticeMode] = useState<PracticeMode>("list");
+  const [flashSourceMode, setFlashSourceMode] = useState<ViewMode>("sentences");
   const [selectedLessonIds, setSelectedLessonIds] = useState<string[]>(
     content.lessons[0]?.id ? [content.lessons[0].id] : [],
   );
@@ -139,12 +140,14 @@ export default function App() {
     [vocabularySections],
   );
 
+  const flashSourceItems = flashSourceMode === "sentences" ? sentenceItems : vocabularyItems;
+
   const flashDeck = useMemo(
     () =>
       flashShuffle
-        ? shufflePracticeItems(sentenceItems, flashShuffleSeed)
-        : sentenceItems,
-    [flashShuffle, flashShuffleSeed, sentenceItems],
+        ? shufflePracticeItems(flashSourceItems, flashShuffleSeed)
+        : flashSourceItems,
+    [flashShuffle, flashShuffleSeed, flashSourceItems],
   );
 
   const visibleItems = useMemo(() => {
@@ -162,14 +165,18 @@ export default function App() {
   );
 
   const canPlay = availability === "supported" && visibleItems.length > 0;
+  const flashButtonItems = viewMode === "sentences" ? sentenceItems : vocabularyItems;
+  const canStartFlash = flashButtonItems.length > 0;
   const practiceHeading = normalizedQuery
     ? "検索結果"
     : practiceMode === "flash"
-      ? "フラッシュ暗記"
+      ? flashSourceMode === "sentences"
+        ? "フラッシュ暗記"
+        : "単語暗記"
     : viewMode === "sentences"
       ? selectedLessons.length === 1
         ? selectedLessons[0]?.title
-        : `選択中の文法（${selectedLessons.length}件）`
+        : "例文"
       : "登場単語一覧";
   const practiceEyebrow =
     practiceMode === "flash"
@@ -222,18 +229,20 @@ export default function App() {
     [setFlashShuffle, stop],
   );
 
-  const startFlash = useCallback(() => {
-    if (flashDeck.length === 0) {
+  const startFlash = useCallback((sourceMode: ViewMode) => {
+    const nextItems = sourceMode === "sentences" ? sentenceItems : vocabularyItems;
+    if (nextItems.length === 0) {
       return;
     }
 
     stop();
-    setViewMode("sentences");
+    setFlashSourceMode(sourceMode);
     setPracticeMode("flash");
     setIsFlashComplete(false);
     setIsFlashAnswerVisible(false);
+    setFlashIndex(0);
     setIsFlashRunning(true);
-  }, [flashDeck.length, stop]);
+  }, [sentenceItems, stop, vocabularyItems]);
 
   const goToNextFlash = useCallback(() => {
     if (flashDeck.length === 0) {
@@ -283,8 +292,8 @@ export default function App() {
       return;
     }
 
-    startFlash();
-  }, [isFlashRunning, startFlash, stopFlash]);
+    startFlash(practiceMode === "flash" ? flashSourceMode : viewMode);
+  }, [flashSourceMode, isFlashRunning, practiceMode, startFlash, stopFlash, viewMode]);
 
   const playCurrentFlashItem = useCallback(() => {
     if (currentFlashItem) {
@@ -541,21 +550,6 @@ export default function App() {
                   <Languages size={18} aria-hidden="true" />
                   単語
                 </button>
-                <button
-                  className={practiceMode === "flash" ? "active" : ""}
-                  data-testid="flash-tab"
-                  type="button"
-                  role="tab"
-                  aria-selected={practiceMode === "flash"}
-                  onClick={() => {
-                    stop();
-                    setViewMode("sentences");
-                    setPracticeMode("flash");
-                  }}
-                >
-                  <Brain size={18} aria-hidden="true" />
-                  暗記
-                </button>
               </div>
               <p className="eyebrow">{practiceEyebrow}</p>
               <h2>{practiceHeading}</h2>
@@ -578,6 +572,16 @@ export default function App() {
               </label>
               {practiceMode === "list" ? (
                 <>
+                  <button
+                    className="secondary-action memorize-action"
+                    data-testid="memorize-visible"
+                    type="button"
+                    disabled={!canStartFlash}
+                    onClick={() => startFlash(viewMode)}
+                  >
+                    <Brain size={18} aria-hidden="true" />
+                    暗記
+                  </button>
                   <button
                     className="primary-action"
                     data-testid="play-visible"
@@ -626,6 +630,7 @@ export default function App() {
               item={currentFlashItem}
               itemCount={flashDeck.length}
               pace={flashPace}
+              sourceMode={flashSourceMode}
               onPaceChange={setFlashPace}
               onPlayCurrent={playCurrentFlashItem}
               onPrevious={goToPreviousFlash}
@@ -634,7 +639,7 @@ export default function App() {
               onReturnToList={() => {
                 stopFlash();
                 setPracticeMode("list");
-                setViewMode("sentences");
+                setViewMode(flashSourceMode);
               }}
               onRevealOrNext={revealAnswerOrAdvance}
               onNext={goToNextFlash}
@@ -771,6 +776,7 @@ function FlashMemorizationPanel({
   item,
   itemCount,
   pace,
+  sourceMode,
   onNext,
   onPaceChange,
   onPlayCurrent,
@@ -792,6 +798,7 @@ function FlashMemorizationPanel({
   item: SpeechPracticeItem | null;
   itemCount: number;
   pace: FlashPace;
+  sourceMode: ViewMode;
   onNext: () => void;
   onPaceChange: (pace: FlashPace) => void;
   onPlayCurrent: () => void;
@@ -806,7 +813,9 @@ function FlashMemorizationPanel({
   if (itemCount === 0 || !item) {
     return (
       <div className="empty-state">
-        左の文法を選択すると暗記を開始できます。
+        {sourceMode === "sentences"
+          ? "左の文法を選択すると暗記を開始できます。"
+          : "暗記できる単語がありません。"}
       </div>
     );
   }

@@ -216,9 +216,9 @@ h3 {
 
 .mode-switch {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 4px;
-  width: 292px;
+  width: 190px;
   margin-bottom: 14px;
   padding: 4px;
   border-radius: 8px;
@@ -501,6 +501,10 @@ h3 {
   box-shadow: 0 4px 12px rgba(27, 37, 33, 0.08);
 }
 
+.memorize-action {
+  min-width: 94px;
+}
+
 .flash-panel {
   display: grid;
   gap: 14px;
@@ -747,7 +751,7 @@ button.flash-card:hover {
   }
 
   .mode-switch {
-    width: min(360px, 100%);
+    width: min(260px, 100%);
   }
 
   .vocabulary-stack {
